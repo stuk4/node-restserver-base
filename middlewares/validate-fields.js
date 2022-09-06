@@ -1,6 +1,6 @@
 import { request, response } from "express";
 import { validationResult } from "express-validator";
-import User from "../models/user.js";
+
 
 const validateFields = (req=request,res=response,next) =>{
     const errors = validationResult(req);

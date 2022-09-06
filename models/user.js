@@ -32,9 +32,10 @@ const UserSchema = Schema({
     }
 
 })
-// Limpiar objeto que entrega al crear
+// Limpiar objeto que entrega al crear y formatear
 UserSchema.methods.toJSON = function(){
-    const {__v,password,...user} = this.toObject();
+    const {__v,password,_id,...user} = this.toObject();
+    user.uid = _id;
     return user;
 
 }

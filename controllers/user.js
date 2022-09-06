@@ -53,7 +53,7 @@ const usersPost = async (req=request,res = response) =>{
 
 const usersDelete = async (req,res = response) =>{
     const { id } = req.params
-    console.log("PORT: ",process.env.PORT)
+
     const user = await User.findByIdAndUpdate(id,{status:false},{new:true})
  
     res.json(user)
