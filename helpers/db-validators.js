@@ -1,3 +1,4 @@
+import { Category, Product } from '../models/index.js';
 import Role from '../models/role.js'
 import User from '../models/user.js';
 const isValidRole = async (role = '') => {
@@ -20,8 +21,22 @@ const existUserById = async (id) =>{
     }
   
 }
+const existCategoryById = async (id) =>{
+        const category = await Category.findById(id)
+        if(!category){
+            throw new Error(`El id no existe ${id}`);
+        }
+}
+const existProductById = async (id) =>{
+        const product = await Product.findById(id)
+        if(!product){
+            throw new Error(`El id no existe ${id}`);
+        }
+}
 export {
     isValidRole,
     emailExist,
-    existUserById
+    existUserById,
+    existCategoryById,
+    existProductById
 }
