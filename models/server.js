@@ -5,7 +5,9 @@ import auth from '../routes/auth.js';
 import products from '../routes/products.js';
 import categories from '../routes/categories.js'
 import search from '../routes/search.js'
+import uploads from '../routes/uploads.js'
 import { dbConection } from '../database/config.js';
+import fileUpload from 'express-fileupload';
 
 class Server {
     constructor(){
@@ -17,7 +19,8 @@ class Server {
             users: '/api/users',
             categories:'/api/categories',
             products:'/api/products',
-            search:'/api/search'
+            search:'/api/search',
+            uploads:'/api/upload',
         }
 
      
@@ -40,6 +43,12 @@ class Server {
 
         // Directorio public
         this.app.use(express.static('public'));
+        // FileUpload - Carga de archivos
+        this.app.use(fileUpload({
+            useTempFiles:true,
+            tempFileDir:'/tmp/',
+            createParentPath:true
+        }))
     }
 
     routes(){
@@ -48,6 +57,7 @@ class Server {
         this.app.use(this.paths.categories,categories)
         this.app.use(this.paths.products,products)
         this.app.use(this.paths.search,search)
+        this.app.use(this.paths.uploads,uploads)
     }
 
     listen(){

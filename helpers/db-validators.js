@@ -33,10 +33,20 @@ const existProductById = async (id) =>{
             throw new Error(`El id no existe ${id}`);
         }
 }
+
+// Validar colecciones permitidas
+const permittedColections = (colection ='',colections=[] ) =>{
+    const include = colections.includes(colection);
+    if(!include){
+        throw new Error(`La colecció ${colection} no es permitida - ${colections}`)
+    }
+    return true;
+}
 export {
     isValidRole,
     emailExist,
     existUserById,
     existCategoryById,
-    existProductById
+    existProductById,
+    permittedColections
 }
